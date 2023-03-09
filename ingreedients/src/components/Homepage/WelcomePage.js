@@ -8,7 +8,7 @@ import {
 } from "../../StyledComponents"
 
 
-function WelcomePage() {
+function WelcomePage({ userName }) {
   return (
     <>
       <HomepageOverlay>

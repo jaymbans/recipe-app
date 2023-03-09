@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';
@@ -54,7 +54,6 @@ export const HomepageContainer = styled(Box)({
 })
 
 export const HomepageContent = styled(Box)({
-  background: 'red',
   width: '50%',
   height: '100%',
   display: 'flex',
@@ -120,4 +119,12 @@ export const GreenButton = styled(Button)({
     boxShadow: 'none',
   },
   position: 'relative'
+})
+
+export const Title = styled(Typography)({
+  fontSize: 50,
+})
+
+export const Description = styled(Typography)({
+  fontSize: 18,
 })
