@@ -3,13 +3,16 @@ import NavigationBar from "../NavigationBar";
 import WelcomePage from "./WelcomePage";
 import WelcomeBackPage from "./WelcomeBackPage";
 
-function Homepage({ userName }) {
+function Homepage({ userName, setUserName, setFirstVisit, firstVisit }) {
   return (
     <>
       <NavigationBar />
       <HomepageContainer>
-        {/* <WelcomePage /> */}
-        <WelcomeBackPage />
+        {firstVisit ?
+          <WelcomePage setUserName={setUserName} setShowHomepagePopup={setFirstVisit} />
+          :
+          <WelcomeBackPage userName={userName} firstVisit={firstVisit} />
+        }
       </HomepageContainer>
     </>
   )

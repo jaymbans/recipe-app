@@ -37,10 +37,12 @@ export const NavLinkContainer = styled(Box)({
 
 export const NavLink = styled(Link)({
   fontFamily: 'Inter, sans-serif',
-  color: primaryGray,
   fontSize: 20,
   textDecoration: 'none',
-  fontWeight: 'bold'
+  fontWeight: 'bold',
+  '& .active': {
+    color: primaryOlive
+  },
 })
 
 // Homepage

@@ -8,3 +8,11 @@ body,
 html {
   width: 100%;
 }
+
+a {
+  color: #717070
+}
+
+.active {
+  color: #71865C
+}
