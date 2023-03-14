@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 // Colors
 export const primaryOlive = '#71865C';
 export const primaryGray = '#717070';
-export const secondaryBeige = '#F6F1EB'
+export const secondaryBeige = '#F6F1EB';
+export const offMaroon = '#9C6B57';
 
 // Navigation Bar Styles
 export const NavigationContainer = styled(Box)({
@@ -101,6 +102,55 @@ export const WelcomePagePopup = styled(Box)({
   paddingTop: '10%'
 })
 
+// My Recipes
+export const MyRecipesContainer = styled(Box)({
+  padding: '2% 2%',
+  width: '100%',
+})
+
+export const CategoryPane = styled(Button)({
+  height: '120px',
+  width: '170px',
+  background: 'black',
+  margin: '0 10px',
+  color: 'white',
+  textTransform: 'capitalize',
+  fontWeight: 'bold',
+  fontSize: '18px',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  '&:hover': {
+    opacity: '.8'
+  }
+})
+
+export const RecipePaneContainer = styled(Box)({
+  background: secondaryBeige,
+  width: '100%',
+  padding: '5px 0',
+  height: '120px',
+  margin: '15px auto',
+  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+  borderRadius: '5px',
+  display: 'flex',
+  maxWidth: '1200px'
+})
+
+export const DietTab = styled(Box)({
+  width: '40%',
+  height: '40%',
+  borderRadius: '5px',
+  background: 'gray',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: 'white',
+  fontWeight: 'bold',
+  fontFamily: 'Inter',
+  marginRight: '20px'
+})
+
+
 // Utilities
 export const BeigeInput = styled(TextField)({
   background: secondaryBeige,
@@ -127,6 +177,13 @@ export const Title = styled(Typography)({
   fontSize: 50,
 })
 
+export const SectionTitle = styled(Typography)({
+  fontSize: 45,
+})
+
 export const Description = styled(Typography)({
   fontSize: 18,
+})
+export const SmallDescription = styled(Typography)({
+  fontSize: 16,
 })

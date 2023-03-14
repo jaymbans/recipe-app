@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 // component imports
 import Homepage from './components/Homepage/Homepage';
-import MyRecipes from './components/MyRecipes';
+import MyRecipes from './components/Recipes/MyRecipes';
 
 function App() {
   const [userName, setUserName] = useState('Name');
@@ -19,7 +19,7 @@ function App() {
             <Homepage userName={userName} setUserName={setUserName} firstVisit={firstVisit} setFirstVisit={setFirstVisit} />
           } />
           <Route path='/recipes' element={
-            <MyRecipes />
+            <MyRecipes userName={userName} />
           } />
         </Routes>
       </Router>

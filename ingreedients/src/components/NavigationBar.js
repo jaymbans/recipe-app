@@ -14,8 +14,6 @@ function NavigationBar() {
     const navLinks = Array.from(document.querySelectorAll('.nav-link'));
     navLinks.forEach(link => link.classList.remove('active'));
     e.target.classList.add('active')
-
-    console.log(navLinks[0])
   }
 
   return (
