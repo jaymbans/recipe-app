@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NavigationBar from '../NavigationBar';
 import Box from '@mui/material/Box';
 import { Description, SectionTitle, SmallDescription, primaryGray, MyRecipesContainer, CategoryPane } from '../../StyledComponents';
@@ -9,10 +9,19 @@ import { Link } from 'react-router-dom';
 
 
 function MyRecipes({ userName }) {
-  const userRecipes = user1.recipes;
-  const currentCategory = null;
 
+  const [displayRecipes, setDisplayRecipes] = useState(user1.recipes);
+  const [currentCategory, setCurrentCategory] = useState('');
 
+  const filterRecipes = (e) => {
+    const recipesToDisplay = user1.recipes.filter(recipe => {
+      return recipe.categories.includes(e.target.textContent)
+    })
+
+    setDisplayRecipes(recipesToDisplay);
+    setCurrentCategory(e.target.textContent)
+    return;
+  }
 
 
 
@@ -40,50 +49,55 @@ function MyRecipes({ userName }) {
           alignItems: 'center'
         }}>
           <SectionTitle sx={{ textAlign: 'center', }}>{`${userName}'s Recipes`}</SectionTitle>
-          <Description sx={{ color: 'red', fontWeight: 'bold', textAlign: 'center' }}>{`0 Total Recipes`}</Description>
+          <Description sx={{ color: 'red', fontWeight: 'bold', textAlign: 'center' }}>{`${user1.recipes.length} Total Recipes`}</Description>
           <SmallDescription sx={{ color: primaryGray, fontWeight: 'bold', textAlign: 'center' }}>{`Latest Recipe: ${'Gochujang Noodles'}, ${'March 1, 2022'}`}</SmallDescription>
         </Box>
       </Box>
       <MyRecipesContainer>
         <Typography variant="h4">Categories</Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', margin: '35px 0' }}>
-          <CategoryPane sx={{
+          <CategoryPane onClick={filterRecipes} sx={{
             background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://www.kyleecooks.com/wp-content/uploads/2021/12/Chocolate-Chip-Pancakes-1200x900-1-1.jpg')`,
-            backgroundSize: 'cover'
+            backgroundSize: 'cover',
+            id: 'breakfast'
           }}>
             Breakfast
           </CategoryPane>
-          <CategoryPane sx={{
+          <CategoryPane onClick={filterRecipes} sx={{
             background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://img.taste.com.au/bkaitH9W/taste/2016/11/pork-and-bean-burrito-bowl-109208-1.jpeg')`,
             backgroundSize: 'cover',
+            id: 'lunch'
           }}>
             Lunch
           </CategoryPane>
-          <CategoryPane sx={{
+          <CategoryPane onClick={filterRecipes} sx={{
             background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://i.pinimg.com/originals/db/ea/4e/dbea4e1ba19d167660e400f19b1a0e88.png')`,
             backgroundSize: 'cover',
+            id: 'dinner'
           }}>
             Dinner
           </CategoryPane>
-          <CategoryPane sx={{
+          <CategoryPane onClick={filterRecipes} sx={{
             background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://theviewfromgreatisland.com/wp-content/uploads/2019/06/Creamsicle-Cake-8508213-June-21-2019.jpg')`,
             backgroundSize: 'cover',
+            id: 'dessert'
           }}>
             Dessert
           </CategoryPane>
           <CategoryPane sx={{
             background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://wichitamom.com/wp-content/uploads/2020/03/french-fries.png')`,
             backgroundSize: 'cover',
+            id: 'snacks'
           }}>
             Snacks
           </CategoryPane>
         </Box>
         <Box>
-          <Typography variant="h4">{`${userName}'s ${''} Recipes (${userRecipes.length})`}</Typography>
+          <Typography variant="h4">{`${userName}'s ${currentCategory} ${''} Recipes (${displayRecipes.length})`}</Typography>
           {
-            userRecipes.map(recipe => {
+            displayRecipes.map(recipe => {
               return (
-                <RecipePane recipeData={recipe} />
+                <RecipePane key={recipe.recipeName} recipeData={recipe} />
               )
             })
           }
