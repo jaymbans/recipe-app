@@ -1,6 +1,7 @@
 import { RecipePaneContainer, Description, primaryOlive, DietTab, offMaroon } from '../../StyledComponents';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 function RecipePane({ recipeData }) {
   return (
@@ -19,7 +20,11 @@ function RecipePane({ recipeData }) {
           <Description sx={{ color: primaryOlive }}>
             {recipeData.categories.join('/')}
           </Description>
-          <Typography variant='h5' sx={{ fontStyle: 'italic', fontWeight: 900 }}>{recipeData.recipeName}</Typography>
+          <Link to={`/recipes/${recipeData.recipeName.toLowerCase().split(' ').join('-')}`} style={{ textDecoration: 'none', color: 'black' }}>
+            <Typography variant='h5' sx={{ fontStyle: 'italic', fontWeight: 900 }}>
+              {recipeData.recipeName}</Typography>
+          </Link>
+
         </Box>
         <Box sx={{ width: '40%', display: 'flex', flexWrap: 'wrap' }}>
           {

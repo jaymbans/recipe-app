@@ -2,6 +2,8 @@ import { Button, TextField, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';
+import List from '@mui/material/List';
+
 
 // Colors
 export const primaryOlive = '#71865C';
@@ -150,6 +152,27 @@ export const DietTab = styled(Box)({
   marginRight: '20px'
 })
 
+export const RecipeDetailsMetaContainer = styled(Box)({
+  width: '100%',
+  padding: '5% 7vw',
+  background: secondaryBeige,
+  display: 'flex',
+  justifyContent: 'center',
+  flexDirection: 'column'
+})
+
+export const RecipeDetailsContent = styled(Box)({
+  display: 'flex',
+})
+
+export const IngredientList = styled(List)({
+  textDecoration: 'none',
+  width: '60%',
+  fontFamily: 'Inter',
+  lineHeight: '2.5',
+  paddingTop: 0,
+  marginTop: 0
+})
 
 // Utilities
 export const BeigeInput = styled(TextField)({
@@ -173,6 +196,22 @@ export const GreenButton = styled(Button)({
   position: 'relative'
 })
 
+export const RedButton = styled(Button)({
+  background: '#C77474',
+  color: 'white',
+  textTransform: 'capitalize',
+  height: 45,
+  width: 120,
+  '&:hover': {
+    backgroundColor: 'red',
+    borderColor: '#0062cc',
+    boxShadow: 'none',
+  },
+  position: 'relative'
+})
+
+
+
 export const Title = styled(Typography)({
   fontSize: 50,
 })
@@ -187,3 +226,5 @@ export const Description = styled(Typography)({
 export const SmallDescription = styled(Typography)({
   fontSize: 16,
 })
+
+
