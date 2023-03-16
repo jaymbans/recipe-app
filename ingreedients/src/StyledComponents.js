@@ -167,7 +167,6 @@ export const RecipeDetailsContent = styled(Box)({
 
 export const IngredientList = styled(List)({
   textDecoration: 'none',
-  width: '60%',
   fontFamily: 'Inter',
   lineHeight: '2.5',
   paddingTop: 0,

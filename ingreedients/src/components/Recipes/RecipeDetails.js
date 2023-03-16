@@ -96,21 +96,26 @@ function RecipeDetails() {
                 width: '50%',
                 borderRight: '1.5px solid #9C6B57',
                 minHeight: '20vh',
+                display: 'flex',
+                justifyContent: 'flex-end',
+                paddingRight: '5%'
               }}>
-                <Description sx={{ fontWeight: 'bold', display: 'flex', alignItems: 'center', height: '60px' }}>
-                  <img src={require('../../assets/groceryIcon.png')} style={{ height: 45 }} /> Ingredients{` (${recipeDetails.ingredients.length})`}
-                </Description>
-                <IngredientList className='ingredient-list'>
-                  {recipeDetails.ingredients.map(ingredient => {
-                    return <ListItem sx={{ paddingTop: 0 }}>{'🔶 ' + ingredient}</ListItem>
-                  })}
-                </IngredientList>
+                <Box sx={{ display: 'flex', flexDirection: 'column', width: 'fit-content' }}>
+                  <Description sx={{ fontWeight: 'bold', display: 'flex', alignItems: 'center', height: '60px' }}>
+                    <img src={require('../../assets/groceryIcon.png')} style={{ height: 45 }} /> Ingredients{` (${recipeDetails.ingredients.length})`}
+                  </Description>
+                  <IngredientList className='ingredient-list'>
+                    {recipeDetails.ingredients.map(ingredient => {
+                      return <ListItem sx={{ paddingTop: 0 }}>{'🔶 ' + ingredient}</ListItem>
+                    })}
+                  </IngredientList>
+                </Box>
               </Box>
               <Box sx={{
                 width: '50%',
                 borderLeft: '1.5px solid #9C6B57',
                 minHeight: '20vh',
-                paddingLeft: '10%'
+                paddingLeft: '5%'
               }}>
                 <Description sx={{
                   fontWeight: 'bold',
