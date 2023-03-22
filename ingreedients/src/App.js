@@ -7,10 +7,20 @@ import Homepage from './components/Homepage/Homepage';
 import MyRecipes from './components/Recipes/MyRecipes';
 import RecipeDetails from './components/Recipes/RecipeDetails';
 import AddRecipes from './components/Recipes/AddRecipes';
+import useLocalStorage from './useLocalStorage';
 
 function App() {
-  const [userName, setUserName] = useState('Name');
-  const [firstVisit, setFirstVisit] = useState(true);
+  const [userName, setUserName] = useLocalStorage('user-name', '');
+
+  let firstVisitValue;
+
+  if (userName.length) {
+    firstVisitValue = false;
+  } else {
+    firstVisitValue = true;
+  }
+
+  const [firstVisit, setFirstVisit] = useState(firstVisitValue);
 
   return (
     <div className="App">

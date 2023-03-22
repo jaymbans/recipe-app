@@ -47,7 +47,7 @@ function NavigationBar() {
         <NavLink id='home-link' to='/' className='nav-link'>Home</NavLink>
         <NavLink id='recipes-link' to='/recipes' className='nav-link'>My Recipes</NavLink>
         <NavLink id='add-recipes-link' to='/add-recipes' className='nav-link'>Add Recipes</NavLink>
-        <NavLink id='profile-link' className='nav-link'>Profile</NavLink>
+        <NavLink id='profile-link' to='/profile' className='nav-link'>Profile</NavLink>
       </NavLinkContainer>
     </NavigationContainer>
   )

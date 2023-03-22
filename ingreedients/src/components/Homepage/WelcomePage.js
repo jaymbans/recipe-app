@@ -9,6 +9,7 @@ import {
 
 
 function WelcomePage({ setUserName, setShowHomepagePopup }) {
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const nameInput = document.getElementById('user-name-input');

@@ -19,7 +19,7 @@ import { GhostButton } from '../../StyledComponents'
 
 import RecipeIngredient from './RecipeIngredient';
 import { useNavigate } from "react-router-dom";
-
+import useLocalStorage from '../../useLocalStorage';
 
 function AddRecipes() {
   const navigate = useNavigate();
@@ -43,6 +43,8 @@ function AddRecipes() {
       lactosefree: false,
       ketofriendly: false
     },
+    mealTypeCategoryArr: [],
+    dietCategoryArr: [],
     dateAdded: null
   })
 
@@ -74,9 +76,11 @@ function AddRecipes() {
       updatedIngredients.push(measurementIngredientCombo)
     })
 
+
     setFormData({
       ...formData,
-      ['ingredients']: updatedIngredients
+      ['ingredients']: updatedIngredients,
+      ['dateAdded']: new Date()
     })
 
     nextStep()
@@ -142,6 +146,9 @@ function AddRecipes() {
 
 
   // Step 3
+  const [recipes, setRecipes] = useLocalStorage("recipes", []);
+
+
   const clickSelectButton = (e) => {
     const buttonValue = String(e.target.textContent.toLowerCase().split(' ').join(''));
 
@@ -160,6 +167,29 @@ function AddRecipes() {
     })
   }
 
+  const convertCategoriesToArray = () => {
+    const categoryArray = [];
+    for (let category in formData.mealTypes) {
+      if (formData.mealTypes[category])
+        categoryArray.push(category)
+    }
+
+    const dietsArray = [];
+    for (let diet in formData.diet) {
+      if (formData.diet[diet])
+        dietsArray.push(diet)
+    }
+
+    setFormData({
+      ...formData,
+      ['mealTypeCategoryArr']: categoryArray,
+      ['dietCategoryArr']: dietsArray
+    })
+
+    nextStep();
+
+  }
+
   const updateImageUrl = (e) => {
     setFormData({
       ...formData,
@@ -170,13 +200,17 @@ function AddRecipes() {
 
   const submitRecipe = () => {
 
-    setFormData({
-      ...formData,
-      ['dateAdded']: new Date()
-    })
+    setRecipes(() => [
+      ...recipes,
+      formData
+    ])
 
 
-    navigate(`/recipes/${formData.name.toLowerCase().split(' ').join('-')}`)
+
+    setTimeout(() => {
+      navigate(`/recipes/${formData.name.toLowerCase().split(' ').join('-')}`)
+    }, 1000);
+
     return;
   }
 
@@ -329,7 +363,7 @@ function AddRecipes() {
                 <SelectButton onClick={clickSelectButton}>Lactose Free</SelectButton>
                 <SelectButton onClick={clickSelectButton}>Keto Friendly</SelectButton>
               </Box>
-              <GreenButton sx={{ width: '40%', borderRadius: 0 }} onClick={nextStep}>
+              <GreenButton sx={{ width: '40%', borderRadius: 0 }} onClick={convertCategoriesToArray}>
                 Finish & Submit
               </GreenButton>
             </AddRecipeStepContent>

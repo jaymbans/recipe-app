@@ -1,9 +1,27 @@
-import { useState } from 'react';
 import { Title, Description, GreenButton, primaryOlive } from '../../StyledComponents';
 import Box from '@mui/material/Box';
+import { useNavigate } from "react-router-dom";
+import useLocalStorage from '../../useLocalStorage';
 
 function WelcomeBackPage({ userName }) {
-  const hasRecipes = false;
+  const [userRecipes, setUserRecipes] = useLocalStorage('recipes', []);
+
+  let hasRecipes = false;
+
+  if (userRecipes.length) {
+    hasRecipes = true;
+  }
+
+  const navigate = useNavigate();
+
+  const myRecipesRedirect = () => {
+    navigate('/recipes')
+    return
+  }
+  const addRecipesRedirect = () => {
+    navigate('/add-recipes')
+    return
+  }
 
   return (
 
@@ -34,10 +52,15 @@ function WelcomeBackPage({ userName }) {
         </Description>
         {
           !hasRecipes ?
-            <GreenButton sx={{ width: '80%', marginTop: '5px' }}>
+            <GreenButton
+              sx={{ width: '80%', marginTop: '5px' }}
+              onClick={addRecipesRedirect}
+            >
               Add Recipes
             </GreenButton> :
-            <GreenButton sx={{ width: '80%', marginTop: '5px' }}>
+            <GreenButton
+              onClick={myRecipesRedirect}
+              sx={{ width: '80%', marginTop: '5px' }}>
               My Recipes
             </GreenButton>
         }
@@ -48,12 +71,12 @@ function WelcomeBackPage({ userName }) {
           <img src={require('../../assets/bellIcon.png')} style={{ width: 'auto', height: '65%' }} />
           <Box sx={{ paddingLeft: 2.5 }}>
             <Description>
-              Total Recipes: <strong>{0}</strong>
+              Total Recipes: <strong>{userRecipes.length}</strong>
             </Description>
             <Description>
               Last Recipe:
               <em style={{ color: primaryOlive, fontWeight: 'bold' }}>
-                {'N/a'}
+                {userRecipes[userRecipes.length - 1].name}
               </em>
             </Description>
           </Box>

@@ -19,22 +19,47 @@ import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import Spinner from '../Spinner';
+import useLocalStorage from '../../useLocalStorage';
+import { useNavigate } from "react-router-dom";
+
 
 function RecipeDetails() {
+  const navigate = useNavigate();
+
+  const [usersRecipes, setUsersRecipes] = useLocalStorage('recipes', [])
   const [recipeDetails, setRecipeDetails] = useState({});
   const [loading, setLoading] = useState(true);
+  const [recipeCategories, setRecipeCategories] = useState([]);
+  const [recipeDiets, setRecipeDiets] = useState([]);
   let location = useLocation();
+
+
+  const deleteRecipe = () => {
+    const oldRecipes = usersRecipes;
+
+    const newRecipes = oldRecipes.filter(recipe => {
+      return recipe.name !== recipeDetails.name
+    })
+
+    setUsersRecipes(newRecipes)
+
+    setTimeout(() => {
+      navigate(`/recipes/`)
+    }, 1000);
+  }
 
   useEffect(() => {
     const recipeQueryName = location.pathname.split('/')[[location.pathname.split('/').length - 1]];
 
-    const desiredRecipe = user1.recipes.filter(recipe => {
-      return recipe.recipeName.toLowerCase().split(' ').join('-') === recipeQueryName
-    });
+    const desiredRecipe = usersRecipes.filter(recipe => {
+      return recipe['name'].toLowerCase().split(' ').join('-') === recipeQueryName
+    })[0];
 
-    setRecipeDetails(desiredRecipe[0]);
+    setRecipeDetails(desiredRecipe)
+
     setLoading(false);
-  }, [location, recipeDetails])
+  }, []
+  )
 
 
   return (
@@ -45,7 +70,7 @@ function RecipeDetails() {
           <>
             <RecipeDetailsMetaContainer>
               <RecipeDetailsContent>
-                <img src={recipeDetails.recipeImg} style={{
+                <img src={recipeDetails.img} style={{
                   width: '170px',
                   height: '120px',
                   objectFit: 'cover',
@@ -53,18 +78,19 @@ function RecipeDetails() {
                 }} />
                 <Box sx={{ paddingLeft: '15px' }}>
                   <Box sx={{ display: 'flex' }}>
-                    <SectionTitle sx={{ fontWeight: 900 }}>
-                      {recipeDetails.recipeName}
+                    <SectionTitle sx={{ fontWeight: 900, textTransform: 'capitalize' }}>
+                      {recipeDetails.name}
                     </SectionTitle>
                     <ShareOutlinedIcon sx={{ fontSize: 45 }} />
                     <ContentCopyOutlinedIcon sx={{ fontSize: 45 }} />
                   </Box>
                   <Description sx={{
                     color: primaryOlive,
-                    fontWeight: 600
+                    fontWeight: 600,
+                    textTransform: 'capitalize'
                   }}>
                     {
-                      recipeDetails.categories.join('/')
+                      recipeDetails.mealTypeCategoryArr.join('/')
                     }
                   </Description>
                 </Box>
@@ -78,16 +104,16 @@ function RecipeDetails() {
                 width: ' 70%'
               }}>
                 {
-                  recipeDetails.diets.includes('vegan') && <DietTab sx={{ background: primaryOlive }}>Vegan Option</DietTab>
+                  recipeDetails.dietCategoryArr.includes('vegan') && <DietTab sx={{ background: primaryOlive }}>Vegan Option</DietTab>
                 }
                 {
-                  recipeDetails.diets.includes('lactosefree') && <DietTab sx={{ background: 'white', color: 'black' }}>Lactose Free</DietTab>
+                  recipeDetails.dietCategoryArr.includes('lactosefree') && <DietTab sx={{ background: 'white', color: 'black' }}>Lactose Free</DietTab>
                 }
                 {
-                  recipeDetails.diets.includes('vegetarian') && <DietTab sx={{ background: offMaroon, color: 'white' }}>Vegetarian Friendly</DietTab>
+                  recipeDetails.dietCategoryArr.includes('vegetarian') && <DietTab sx={{ background: offMaroon, color: 'white' }}>Vegetarian Friendly</DietTab>
                 }
                 {
-                  recipeDetails.diets.includes('keto') && <DietTab sx={{ background: '#BFA978', color: 'white' }}>Keto</DietTab>
+                  recipeDetails.dietCategoryArr.includes('keto') && <DietTab sx={{ background: '#BFA978', color: 'white' }}>Keto</DietTab>
                 }
               </Box>
             </RecipeDetailsMetaContainer>
@@ -106,7 +132,7 @@ function RecipeDetails() {
                   </Description>
                   <IngredientList className='ingredient-list'>
                     {recipeDetails.ingredients.map(ingredient => {
-                      return <ListItem key={'ingredient-' + ingredient} sx={{ paddingTop: 0 }}>{'🔶 ' + ingredient}</ListItem>
+                      return <ListItem key={'ingredient-' + ingredient} sx={{ paddingTop: 0 }}>{'🔶 ' + ingredient.split("&").join(' ')}</ListItem>
                     })}
                   </IngredientList>
                 </Box>
@@ -134,7 +160,7 @@ function RecipeDetails() {
                 </ol>
               </Box>
             </RecipeDetailsContent>
-            <RedButton sx={{ display: 'block', margin: '0 auto' }}>Delete Recipe</RedButton>
+            <RedButton onClick={deleteRecipe} sx={{ display: 'block', margin: '0 auto' }}>Delete Recipe</RedButton>
           </>
 
           :
