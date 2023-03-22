@@ -9,10 +9,33 @@ html {
   width: 100%;
 }
 
+body {
+  counter-reset: section;
+}
+
 a {
   color: #717070
 }
 
 .active {
   color: #71865C
+}
+
+.active-btn {
+  background: '#71865C';
+  color: white
+}
+
+.direction-item {
+  font-family: 'Inter';
+  display: flex;
+  position: relative;
+}
+
+.direction-item:before {
+  counter-increment: section;
+  content: counter(section) ".";
+  position: absolute;
+  margin-left: -20px;
+  margin-top: 2rem;
 }

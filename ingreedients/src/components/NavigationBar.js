@@ -31,6 +31,7 @@ function NavigationBar() {
         document.getElementById('profile-link').classList.add('active');
         break;
       default:
+        document.getElementById('home-link').classList.add('active');
         return;
     }
 
@@ -45,7 +46,7 @@ function NavigationBar() {
       <NavLinkContainer>
         <NavLink id='home-link' to='/' className='nav-link'>Home</NavLink>
         <NavLink id='recipes-link' to='/recipes' className='nav-link'>My Recipes</NavLink>
-        <NavLink id='add-recipes-link' className='nav-link'>Add Recipes</NavLink>
+        <NavLink id='add-recipes-link' to='/add-recipes' className='nav-link'>Add Recipes</NavLink>
         <NavLink id='profile-link' className='nav-link'>Profile</NavLink>
       </NavLinkContainer>
     </NavigationContainer>

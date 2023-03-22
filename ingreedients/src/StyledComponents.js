@@ -173,6 +173,26 @@ export const IngredientList = styled(List)({
   marginTop: 0
 })
 
+export const AddRecipeContainer = styled(Box)({
+  width: '100%',
+  minHeight: '95vh',
+  display: 'flex'
+})
+
+export const AddRecipeStepContent = styled(Box)({
+  width: '50%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+})
+
+export const StepTitle = styled(Typography)({
+  color: 'gray',
+  textTransform: 'uppercase',
+  fontSize: '30px'
+})
+
+
 // Utilities
 export const BeigeInput = styled(TextField)({
   background: secondaryBeige,
@@ -209,6 +229,49 @@ export const RedButton = styled(Button)({
   position: 'relative'
 })
 
+export const BlackButton = styled(Button)({
+  background: '#3C3C3C',
+  color: 'white',
+  textTransform: 'capitalize',
+  height: 45,
+  width: '98%',
+  margin: '5% 0',
+  '&:hover': {
+    backgroundColor: '#4C3C4C',
+    borderColor: '#4C3C4C',
+    boxShadow: 'none',
+  },
+  position: 'relative'
+})
+
+
+export const SelectButton = styled(Button)({
+  background: '#E3E3E3',
+  color: '#838383',
+  textTransform: 'capitalize',
+  height: 45,
+  width: '40%',
+  margin: '5% 5%',
+  '&:hover': {
+    backgroundColor: '#878787',
+    color: 'white',
+    borderColor: '#878787',
+    boxShadow: 'none',
+  },
+  position: 'relative',
+  '&.active-btn': {
+    backgroundColor: '#71865C',
+    color: 'white'
+  }
+})
+
+export const GhostButton = styled(Button)({
+  background: 'none',
+  padding: '0',
+  borderRadius: '50%',
+  color: 'red',
+  backgroundColor: 'none'
+})
 
 
 export const Title = styled(Typography)({
@@ -224,6 +287,14 @@ export const Description = styled(Typography)({
 })
 export const SmallDescription = styled(Typography)({
   fontSize: 16,
+})
+
+export const ImageInput = styled(TextField)({
+  background: '#E9EAEA',
+  width: '100%',
+  textAlign: 'center',
+  border: 'none',
+  margin: '15px 0'
 })
 
 

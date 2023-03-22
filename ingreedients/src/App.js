@@ -5,7 +5,8 @@ import { useState } from 'react';
 // component imports
 import Homepage from './components/Homepage/Homepage';
 import MyRecipes from './components/Recipes/MyRecipes';
-import RecipeDetails from './components/Recipes/RecipeDetails'
+import RecipeDetails from './components/Recipes/RecipeDetails';
+import AddRecipes from './components/Recipes/AddRecipes';
 
 function App() {
   const [userName, setUserName] = useState('Name');
@@ -23,6 +24,9 @@ function App() {
           } />
           <Route path='/recipes/:recipename' element={
             <RecipeDetails />
+          } />
+          <Route path='/add-recipes' element={
+            <AddRecipes />
           } />
         </Routes>
       </Router>

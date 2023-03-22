@@ -81,7 +81,7 @@ function RecipeDetails() {
                   recipeDetails.diets.includes('vegan') && <DietTab sx={{ background: primaryOlive }}>Vegan Option</DietTab>
                 }
                 {
-                  recipeDetails.diets.includes('lactose free') && <DietTab sx={{ background: 'white', color: 'black' }}>Lactose Free</DietTab>
+                  recipeDetails.diets.includes('lactosefree') && <DietTab sx={{ background: 'white', color: 'black' }}>Lactose Free</DietTab>
                 }
                 {
                   recipeDetails.diets.includes('vegetarian') && <DietTab sx={{ background: offMaroon, color: 'white' }}>Vegetarian Friendly</DietTab>
@@ -106,7 +106,7 @@ function RecipeDetails() {
                   </Description>
                   <IngredientList className='ingredient-list'>
                     {recipeDetails.ingredients.map(ingredient => {
-                      return <ListItem sx={{ paddingTop: 0 }}>{'🔶 ' + ingredient}</ListItem>
+                      return <ListItem key={'ingredient-' + ingredient} sx={{ paddingTop: 0 }}>{'🔶 ' + ingredient}</ListItem>
                     })}
                   </IngredientList>
                 </Box>
@@ -128,8 +128,8 @@ function RecipeDetails() {
                   Directions{` (${recipeDetails.directions.length})`}
                 </Description>
                 <ol style={{ width: '60%', fontFamily: 'Inter', lineHeight: '2.5', listStylePosition: 'inside' }}>
-                  {recipeDetails.directions.map(direction => {
-                    return <li style={{ paddingLeft: '1rem' }}>{direction}</li>
+                  {recipeDetails.directions.map((direction, i) => {
+                    return <li style={{ paddingLeft: '1rem' }} key={'direction-' + direction + i}>{direction}</li>
                   })}
                 </ol>
               </Box>
