@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom'
-import { user1 } from '../../mockUser';
 import NavigationBar from '../NavigationBar';
 import {
   RecipeDetailsMetaContainer,
@@ -11,7 +10,8 @@ import {
   offMaroon,
   DietTab,
   IngredientList,
-  RedButton
+  RedButton,
+  GhostButton
 } from '../../StyledComponents';
 
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
@@ -48,6 +48,19 @@ function RecipeDetails() {
     }, 1000);
   }
 
+  const copyRecipe = () => {
+    const copiedRecipe =
+      `Hey, check out my ${recipeDetails.name} recipe!
+      Ingredients:
+      ${recipeDetails.ingredients.map(ingredient => ingredient.split('&').join(' '))}
+
+      Directions:
+      ${recipeDetails.directions.map((direction, i) => (i + 1 + '. ' + direction))}
+      `
+
+    navigator.clipboard.writeText(copiedRecipe);
+  }
+
   useEffect(() => {
     const recipeQueryName = location.pathname.split('/')[[location.pathname.split('/').length - 1]];
 
@@ -81,8 +94,9 @@ function RecipeDetails() {
                     <SectionTitle sx={{ fontWeight: 900, textTransform: 'capitalize' }}>
                       {recipeDetails.name}
                     </SectionTitle>
-                    <ShareOutlinedIcon sx={{ fontSize: 45 }} />
-                    <ContentCopyOutlinedIcon sx={{ fontSize: 45 }} />
+                    <GhostButton sx={{ color: 'black' }} onClick={copyRecipe}>
+                      <ContentCopyOutlinedIcon sx={{ fontSize: 45 }} />
+                    </GhostButton>
                   </Box>
                   <Description sx={{
                     color: primaryOlive,

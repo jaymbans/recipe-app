@@ -1,6 +1,6 @@
 import './style.css';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // component imports
 import Homepage from './components/Homepage/Homepage';
@@ -8,9 +8,11 @@ import MyRecipes from './components/Recipes/MyRecipes';
 import RecipeDetails from './components/Recipes/RecipeDetails';
 import AddRecipes from './components/Recipes/AddRecipes';
 import useLocalStorage from './useLocalStorage';
+import Profile from './components/Profile';
 
 function App() {
   const [userName, setUserName] = useLocalStorage('user-name', '');
+
 
   let firstVisitValue;
 
@@ -37,6 +39,9 @@ function App() {
           } />
           <Route path='/add-recipes' element={
             <AddRecipes />
+          } />
+          <Route path='/profile' element={
+            <Profile />
           } />
         </Routes>
       </Router>
