@@ -21,6 +21,9 @@ import RecipeIngredient from './RecipeIngredient';
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from '../../useLocalStorage';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function AddRecipes() {
   const navigate = useNavigate();
 
@@ -62,6 +65,27 @@ function AddRecipes() {
   }
 
   const submitIngredients = () => {
+    if (!formData.name) {
+      toast.error('Recipe name cannot be left blank!')
+      return
+    }
+
+    let recipeCheck = false;
+
+    recipes.forEach(recipe => {
+      if (recipe.name === formData.name) {
+        recipeCheck = true;
+      }
+    })
+
+    if (recipeCheck) {
+      toast.error(`You already have a recipe named ${formData.name}! Please select a new name!`)
+      return;
+    }
+
+
+    let ingredientCheck = false;
+
     const ingredients = Array.from(document.getElementById('ingredient-container').children);
 
     const updatedIngredients = [];
@@ -74,7 +98,16 @@ function AddRecipes() {
 
       const measurementIngredientCombo = `${measurement}&${ingredientName}`;
       updatedIngredients.push(measurementIngredientCombo)
+
+      if (measurementIngredientCombo.length <= 2) {
+        ingredientCheck = true;
+      }
     })
+
+    if (ingredientCheck) {
+      toast.error('Ingredients cannot be left blank!!')
+      return;
+    }
 
 
     setFormData({
@@ -131,9 +164,23 @@ function AddRecipes() {
 
     const updatedDirections = [];
 
+
+    let directionsCheck = false;
+
     directions.forEach(direction => {
       updatedDirections.push(direction.children[0].children[1].children[0].value)
+
+      if (direction.children[0].children[1].children[0].value === '') {
+        directionsCheck = true;
+      }
     })
+
+    if (directionsCheck) {
+      toast.error('Directions cannot be left blank!');
+      return;
+    }
+
+
 
     setFormData({
       ...formData,
@@ -174,6 +221,11 @@ function AddRecipes() {
         categoryArray.push(category)
     }
 
+    if (!categoryArray.length) {
+      toast.error('At least one meal type must be selected!');
+      return;
+    }
+
     const dietsArray = [];
     for (let diet in formData.diet) {
       if (formData.diet[diet])
@@ -198,7 +250,23 @@ function AddRecipes() {
     return;
   }
 
+  const placeHolderImageUrl = () => {
+
+
+    setFormData({
+      ...formData,
+      ['img']: 'https://www.seriouseats.com/thmb/-osPdxHxCxTuA6UL7ABekRdjkSo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__2020__12__20201203-indonesian-pantry-vicky-wasik-1-b827da1c26134cf18153da281f8efb19.jpg'
+    })
+    return;
+  }
+
   const submitRecipe = () => {
+
+    if (!formData.img) {
+      toast.error(`If you'd like to use a custom link, pleace paste an image above`)
+      toast.error(`Otherwise, click on "The Placeholder Above Is Okay" button`)
+      return
+    }
 
     setRecipes(() => [
       ...recipes,
@@ -383,7 +451,7 @@ function AddRecipes() {
         return (
           <AddRecipeContainer>
             <AddRecipeStepContent sx={{ padding: '2% 3%' }}>
-              <StepTitle>[Optional] Step {step}</StepTitle>
+              <StepTitle>Step {step}</StepTitle>
               <SectionTitle sx={{ textAlign: 'center', marginBottom: '20px' }}>
                 Bon Appetit! Your recipe was added!
               </SectionTitle>
@@ -393,7 +461,7 @@ function AddRecipes() {
               <SmallDescription sx={{ color: 'black', fontWeight: 700, width: '100%', textAlign: 'center' }}>
                 Replace the link below to switch the thumbnail!
               </SmallDescription>
-              <ImageInput onChange={updateImageUrl} label='https://MyPlaceholderThumbnailLinkGoesHere' />
+              <ImageInput id={'placeholder-link-input'} onChange={updateImageUrl} label='https://MyPlaceholderThumbnailLinkGoesHere' />
               <img
                 src='https://www.seriouseats.com/thmb/-osPdxHxCxTuA6UL7ABekRdjkSo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__2020__12__20201203-indonesian-pantry-vicky-wasik-1-b827da1c26134cf18153da281f8efb19.jpg'
                 style={{
@@ -404,11 +472,11 @@ function AddRecipes() {
                 }}
               />
               <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
-                <SelectButton sx={{ borderRadius: 0, width: '45%', margin: '0 2%' }}>
+                <SelectButton onClick={placeHolderImageUrl} sx={{ borderRadius: 0, width: '45%', margin: '0 2%' }}>
                   The placeholder above is okay!
                 </SelectButton>
                 <GreenButton onClick={submitRecipe} sx={{ borderRadius: 0, width: '45%', margin: '0 2%' }} >
-                  Use my custom link!
+                  Submit Recipe
                 </GreenButton>
               </Box>
               <SmallDescription sx={{ color: 'black', fontWeight: 700, width: '100%', textAlign: 'center', margin: '15px 0' }}>
@@ -442,6 +510,7 @@ function AddRecipes() {
   return (
     <>
       <NavigationBar />
+      <ToastContainer />
       {displayRecipeStep(step)}
     </>
   )
