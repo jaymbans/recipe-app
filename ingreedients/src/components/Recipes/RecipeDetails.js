@@ -21,6 +21,8 @@ import ListItem from '@mui/material/ListItem';
 import Spinner from '../Spinner';
 import useLocalStorage from '../../useLocalStorage';
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function RecipeDetails() {
@@ -59,6 +61,7 @@ function RecipeDetails() {
       `
 
     navigator.clipboard.writeText(copiedRecipe);
+    toast.success('Recipe copied!')
   }
 
   useEffect(() => {
@@ -82,6 +85,7 @@ function RecipeDetails() {
         !loading ?
           <>
             <RecipeDetailsMetaContainer>
+
               <RecipeDetailsContent>
                 <img src={recipeDetails.img} style={{
                   width: '170px',
@@ -89,6 +93,7 @@ function RecipeDetails() {
                   objectFit: 'cover',
                   objectPosition: 'center',
                 }} />
+                <ToastContainer />
                 <Box sx={{ paddingLeft: '15px' }}>
                   <Box sx={{ display: 'flex' }}>
                     <SectionTitle sx={{ fontWeight: 900, textTransform: 'capitalize' }}>
