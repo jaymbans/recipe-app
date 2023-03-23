@@ -13,15 +13,25 @@ import {
   from '../StyledComponents'
 import useLocalStorage from '../useLocalStorage'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Profile() {
   const editName = () => {
+    if (document.getElementById('edit-user-name-input').value.length < 1) {
+      toast.error('Please Enter a new name!')
+      return
+    }
+
     setUserName(document.getElementById('edit-user-name-input').value);
-    window.location.reload();
+
+    toast.success('Name edited, refresh page to update!')
   }
 
   const deleteRecipes = () => {
     setUserRecipes([]);
+    toast.success('Reset account, refresh page to update!')
   }
 
   const [userName, setUserName] = useLocalStorage('user-name');
@@ -30,6 +40,7 @@ function Profile() {
   return (
     <>
       <NavigationBar />
+      <ToastContainer />
       <WelcomePageContainer
         sx={{
           background: `url(https://i.pinimg.com/736x/8d/7a/05/8d7a050dbc96d9da81406fcb207c3464.jpg)`,
