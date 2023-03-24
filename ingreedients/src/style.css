@@ -39,3 +39,39 @@ a {
   margin-left: -20px;
   margin-top: 2rem;
 }
+
+/* .hamburger-menu {
+  visibility: hidden;
+} */
+
+
+button.hamburger-menu {
+  background: none;
+  border: none;
+}
+
+.hamburger-menu span {
+  background: #71865C;
+  display: block;
+  width: 30px;
+  height: 4px;
+  margin: 2px auto;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger-menu .bar.active:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu .bar.active:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+}
+
+.hamburger-menu .bar.active:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.navbar-right.active {
+  display: 'block'
+}

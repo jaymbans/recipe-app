@@ -37,13 +37,37 @@ function NavigationBar() {
 
   }, [])
 
+
+  const activateHamburgerMenu = (e) => {
+    const menu = document.querySelector('#menu.navbar-right');
+
+    let node = e.target;
+    if (!Array.from(node.classList).includes('hamburger-menu')) {
+      node = node.parentNode;
+    }
+
+    if (![...node.children[0].classList].includes('active')) {
+      Array.from(node.children).forEach(child => child.classList.add('active'));
+      menu.classList.add('show');
+    } else {
+      Array.from(node.children).forEach(child => child.classList.remove('active'))
+      menu.classList.remove('show');
+    }
+
+  }
+
   return (
     <NavigationContainer>
-      <LogoContainer>
-        <img style={{ maxHeight: '100%', position: 'relative', marginRight: '5px', width: 'auto' }} src={require('../assets/spatulaIcon.png')} alt="" />
+      <LogoContainer className='navbar-left'>
+        <img id="logo" style={{ maxHeight: '100%', marginRight: '5px', width: 'auto' }} src={require('../assets/spatulaIcon.png')} alt="" />
         InGredients
+        <button className="hamburger-menu" onClick={activateHamburgerMenu}>
+          <span className='bar'></span>
+          <span className='bar'></span>
+          <span className='bar'></span>
+        </button>
       </LogoContainer>
-      <NavLinkContainer>
+      <NavLinkContainer id='menu' className='navbar-right'>
         <NavLink id='home-link' to='/' className='nav-link'>Home</NavLink>
         <NavLink id='recipes-link' to='/recipes' className='nav-link'>My Recipes</NavLink>
         <NavLink id='add-recipes-link' to='/add-recipes' className='nav-link'>Add Recipes</NavLink>

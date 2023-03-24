@@ -1,6 +1,6 @@
 import { Button, TextField, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/system';
+import { styled, createTheme } from '@mui/system';
 import { Link } from 'react-router-dom';
 import List from '@mui/material/List';
 
@@ -11,6 +11,20 @@ export const primaryGray = '#717070';
 export const secondaryBeige = '#F6F1EB';
 export const offMaroon = '#9C6B57';
 
+// Themes
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xxs: 0, // small phone
+      xs: 300, // phone
+      sm: 600, // tablets
+      md: 900, // small laptop
+      lg: 1200, // desktop
+      xl: 1536 // large screens
+    }
+  }
+});
+
 // Navigation Bar Styles
 export const NavigationContainer = styled(Box)({
   width: '100%',
@@ -20,6 +34,11 @@ export const NavigationContainer = styled(Box)({
   justifyContent: 'center',
   position: 'relative',
   height: '60px',
+  [theme.breakpoints.down('md')]: {
+    flexDirection: 'column',
+    padding: '2% 2%',
+    height: 'auto',
+  }
 })
 
 export const LogoContainer = styled(Box)({
@@ -31,11 +50,39 @@ export const LogoContainer = styled(Box)({
   position: 'relative',
   maxHeight: '100%',
   height: '100%',
+  [theme.breakpoints.down('md')]: {
+    width: '100%',
+    justifyContent: 'space-between',
+    height: '50px'
+  }
+
 })
 export const NavLinkContainer = styled(Box)({
   width: '50%',
   display: 'flex',
-  justifyContent: 'space-between'
+  justifyContent: 'space-between',
+  [theme.breakpoints.down('md')]: {
+    width: '90vw',
+    padding: '0',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    visibility: 'hidden',
+    marginRight: '-400%',
+    transition: 'all .3s ease-in-out',
+    height: '0',
+    zIndex: '10',
+    '&.show': {
+      position: 'absolute',
+      visibility: 'visible',
+      margin: '0',
+      right: '0',
+      top: '60px',
+      height: '100vh',
+      justifyContent: 'flex-start',
+      background: 'white',
+      padding: '2% 2%',
+    }
+  }
 })
 
 export const NavLink = styled(Link)({
@@ -46,6 +93,9 @@ export const NavLink = styled(Link)({
   '& .active': {
     color: primaryOlive
   },
+  [theme.breakpoints.down('md')]: {
+    margin: '2vh',
+  }
 })
 
 // Homepage
