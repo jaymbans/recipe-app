@@ -322,7 +322,12 @@ function AddRecipes() {
               <BlackButton onClick={addIngredient}>+ Add Ingredient</BlackButton>
               <Box
                 onClick={submitIngredients}
-                sx={{ display: 'flex', width: '100%', justifyContent: 'center', marginTop: '50%' }}>
+                sx={{
+                  display: 'flex', width: '100%', justifyContent: 'center', marginTop: '50%',
+                  '@media (max-width:780px)': {
+                    marginTop: '10px',
+                  }
+                }}>
                 <GreenButton sx={{ width: '40%', borderRadius: 0 }} >Next Step</GreenButton>
               </Box>
             </AddRecipeStepContent>
@@ -376,7 +381,11 @@ function AddRecipes() {
               <BlackButton onClick={addDirection}>+ Add Direction</BlackButton>
               <Box
                 onClick={submitDirections}
-                sx={{ display: 'flex', width: '100%', justifyContent: 'center', marginTop: '50%' }}>
+                sx={{
+                  display: 'flex', width: '100%', justifyContent: 'center', marginTop: '50%', '@media (max-width:780px)': {
+                    marginTop: '10px',
+                  }
+                }}>
                 <GreenButton sx={{ width: '40%', borderRadius: 0 }} onClick={submitDirections}>Next Step</GreenButton>
               </Box>
             </AddRecipeStepContent>

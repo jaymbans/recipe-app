@@ -67,7 +67,7 @@ export const NavLinkContainer = styled(Box)({
     flexDirection: 'column',
     alignItems: 'flex-end',
     visibility: 'hidden',
-    marginRight: '-400%',
+    right: '-400%',
     transition: 'all .3s ease-in-out',
     height: '0',
     zIndex: '10',
@@ -158,6 +158,9 @@ export const WelcomePagePopup = styled(Box)({
 export const MyRecipesContainer = styled(Box)({
   padding: '2% 2%',
   width: '100%',
+  [theme.breakpoints.down('md')]: {
+    textAlign: 'center'
+  }
 })
 
 export const CategoryPane = styled(Button)({
@@ -173,6 +176,9 @@ export const CategoryPane = styled(Button)({
   backgroundPosition: 'center',
   '&:hover': {
     opacity: '.8'
+  },
+  [theme.breakpoints.down('md')]: {
+    margin: '5px'
   }
 })
 
@@ -226,7 +232,11 @@ export const IngredientList = styled(List)({
 export const AddRecipeContainer = styled(Box)({
   width: '100%',
   minHeight: '95vh',
-  display: 'flex'
+  display: 'flex',
+  [theme.breakpoints.down('md')]: {
+    flexDirection: 'column',
+    minHeight: 'auto'
+  }
 })
 
 export const AddRecipeStepContent = styled(Box)({
@@ -234,6 +244,9 @@ export const AddRecipeStepContent = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  [theme.breakpoints.down('md')]: {
+    width: '100%'
+  }
 })
 
 export const StepTitle = styled(Typography)({

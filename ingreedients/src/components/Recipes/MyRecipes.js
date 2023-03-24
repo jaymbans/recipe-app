@@ -37,10 +37,14 @@ function MyRecipes({ userName }) {
         width: '100%',
         background: 'url(https://media.tenor.com/UiVtVa1JRjgAAAAd/chop-veggies.gif)',
         backgroundSize: 'cover',
-        backgroundPositionY: '-120px',
+        backgroundPositionY: '-130px',
+        backgroundRepeat: 'no-repeat',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        '@media (max-width: 780px)': {
+          backgroundPosition: 'center'
+        }
       }}>
         <Box sx={{
           background: 'white',
@@ -70,7 +74,12 @@ function MyRecipes({ userName }) {
       </Box>
       <MyRecipesContainer>
         <Typography variant="h4">Categories</Typography>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', margin: '35px 0' }}>
+        <Box sx={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', margin: '35px 0',
+          '@media (max-width: 780px)': {
+            flexWrap: 'wrap'
+          }
+        }}>
           <CategoryPane onClick={filterRecipes} sx={{
             background: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://www.kyleecooks.com/wp-content/uploads/2021/12/Chocolate-Chip-Pancakes-1200x900-1-1.jpg')`,
             backgroundSize: 'cover',
@@ -124,7 +133,7 @@ function MyRecipes({ userName }) {
             fontWeight: 'bold',
             textAlign: 'center',
             margin: '0 auto',
-            fontFamily: 'Inter'
+            fontFamily: 'Inter',
           }}>Add more recipes</Link>
         </Box>
       </MyRecipesContainer>

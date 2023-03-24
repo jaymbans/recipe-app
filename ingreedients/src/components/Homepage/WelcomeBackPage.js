@@ -33,7 +33,11 @@ function WelcomeBackPage({ userName }) {
       alignItems: 'center',
       justifyContent: 'center',
       marginTop: '15%',
-      minHeight: 400
+      minHeight: 400,
+      '@media (max-width:600px)': {
+        width: '80%',
+        margin: '5vh auto'
+      }
     }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: 300, textAlign: 'center' }}>
         <Title variant='h1' sx={{ fontWeight: 700, lineHeight: '60px' }}>
