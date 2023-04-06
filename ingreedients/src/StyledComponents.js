@@ -126,7 +126,6 @@ export const HomepageOverlay = styled(Box)({
   opacity: .7,
   position: 'absolute',
   zIndex: 1,
-  maxwidth: '100vw'
 })
 
 export const WelcomePageContainer = styled(Box)({
