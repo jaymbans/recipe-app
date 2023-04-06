@@ -125,7 +125,8 @@ export const HomepageOverlay = styled(Box)({
   background: 'black',
   opacity: .7,
   position: 'absolute',
-  zIndex: 1
+  zIndex: 1,
+  maxwidth: '100vw'
 })
 
 export const WelcomePageContainer = styled(Box)({
@@ -138,20 +139,15 @@ export const WelcomePageContainer = styled(Box)({
 })
 
 export const WelcomePagePopup = styled(Box)({
-  height: '50%',
-  width: '70%',
-  maxWidth: '700px',
-  maxHeight: '600px',
-  minHeight: '300px',
   background: 'white',
   zIndex: 10,
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'flex-start',
+  justifyContent: 'center',
   alignItems: 'center',
   fontFamily: 'Inter, sans-serif',
-  paddingTop: '10%'
+  padding: '10%'
 })
 
 // My Recipes
