@@ -1,6 +1,6 @@
 # Ingreedients
 <hr>
-<h3><a target="_blank" href="https://jaymbans.github.io/recipe-app/#/">Ingreedients</a> is a workout web application where users can create, save, and share homemade recipes</h3>
+<h3><a target="_blank" href="https://jaymbans.github.io/recipe-app/#/">Ingreedients</a> is a recipe web application where users can create, save, and share homemade recipes</h3>
 
 ### Current Features:
 <ul>
